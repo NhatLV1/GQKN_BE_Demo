@@ -1,0 +1,22 @@
+version: '3.5'
+
+
+networks:
+    default:
+        driver: bridge
+
+services:
+  api-gateway:
+    build:
+      context: ../../
+      dockerfile: ./ci_cd/dev/Dockerfile
+    image: api-gateway:latest
+    container_name: api-gateway
+    environment:
+    - ConnectionString=Server=103.166.185.78;Database=pvi;Trusted_Connection=false;User Id=sa;Password='Pass@word';MultipleActiveResultSets=true
+    - ASPNETCORE_ENVIRONMENT=Development
+    - Pias__CpId=ad5b04d374093366dd7bd7b69ad84151
+    - Pias__Key=fbc5105b0f16a9ec26ec1db8484bf233ef67a686
+    - ASPNETCORE_URLS=http://+:9443
+    ports:
+      - 9443:9443
